@@ -1,0 +1,29 @@
+version: '3.9'
+
+networks:
+  monitoring:
+    driver: bridge
+    
+volumes:
+    grafana_data: {}
+
+services:
+  grafana:
+    image: grafana/grafana:latest #8.1.5
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/grafana-plugins:/var/lib/grafana/plugins
+      - ./grafana/config/:/usr/local/etc/grafana
+    environment:
+      - GF_PATHS_CONFIG=/usr/local/etc/grafana/grafana.ini
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+    labels:
+      org.label-schema.group: "monitoring"
