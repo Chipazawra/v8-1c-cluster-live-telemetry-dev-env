@@ -1,0 +1,3 @@
+[submodule "grafana/grafana-plugins/v-8-1-c-cluster-live-telemetry-plugin"]
+	path = grafana/grafana-plugins/v-8-1-c-cluster-live-telemetry-plugin
+	url = https://github.com/Chipazawra/v-8-1-c-cluster-live-telemetry-plugin
